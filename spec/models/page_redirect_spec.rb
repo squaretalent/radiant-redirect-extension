@@ -58,8 +58,9 @@ describe RedirectPage do
   end
 
   it "should err with 'Redirect URL may not be the same.' when given a catch_url that matches the redirect_url" do
-    @page.parts.build(:name => 'body', :content => 'redirect')    
-    lambda {@page.save!}.should raise_error(RedirectPage::DataMismatch, "Redirect URL may not be the same.")
+    @page.parts.build(:name => 'body', :content => 'redirect')
+    @page.save!
+    @page.errors.on(:base).should match(/Redirect URL may not be the same/)
   end
 
   # it "should err with 'Redirect URL may not be an existing redirect' when given a catch_url that matches the redirect_url" do

@@ -16,7 +16,7 @@ class RedirectPage < Page
 
   def redirect_url_not_restricted
     if slug == redirect_url
-      raise DataMismatch, "Redirect URL may not be the same."
+      errors.add(:base, "Redirect URL may not be the same.")
     end
     # if redirect_url
     #   puts "redirect_url #{redirect_url}"
