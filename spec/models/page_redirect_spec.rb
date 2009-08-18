@@ -63,14 +63,24 @@ describe RedirectPage do
     @page.errors.on(:base).should match(/Redirect URL may not be the same/)
   end
 
-  it "should render if redirect" do
+  it "should render if_redirect_page if a RedirectPage" do
     @page.should render(%{<r:if_redirect_page><r:title /></r:if_redirect_page>}).
       as("Redirect")
   end
 
-  it "should render unless redirect" do
+  it "should not render if_redirect_page if not a RedirectPage" do
+    @root.should render(%{<r:if_redirect_page><r:title /></r:if_redirect_page>}).
+      as("")
+  end
+
+  it "should not render unless_redirect_page if a RedirectPage" do
     @page.should render(%{<r:unless_redirect_page><r:title /></r:unless_redirect_page>}).
       as("")
+  end
+
+  it "should render unless_redirect_page if not a RedirectPage" do
+    @root.should render(%{<r:unless_redirect_page><r:title /></r:unless_redirect_page>}).
+      as("Home")
   end
 
   # it "should err with 'Redirect URL may not be an existing redirect' when given a catch_url that matches the redirect_url" do
